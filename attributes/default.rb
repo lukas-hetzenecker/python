@@ -31,8 +31,6 @@ else
   default['python']['prefix_dir']         = '/usr/local'
 end
 
-default['python']['binary'] = "#{node['python']['prefix_dir']}/bin/python"
-
 default['python']['url'] = 'http://www.python.org/ftp/python'
 default['python']['version'] = '2.7.5'
 default['python']['checksum'] = '3b477554864e616a041ee4d7cef9849751770bc7c39adaf78a94ea145c488059'
@@ -42,8 +40,10 @@ default['python']['make_options'] = %W{install}
 default['python']['pip_location'] = "#{node['python']['prefix_dir']}/bin/pip"
 
 if python['install_method'] == 'package' and platform_family?("rhel")
+   default['python']['binary'] = "#{node['python']['prefix_dir']}/bin/python2.7"
    default['python']['virtualenv_location'] = "#{node['python']['prefix_dir']}/bin/virtualenv-2.7"
 else
+   default['python']['binary'] = "#{node['python']['prefix_dir']}/bin/python"
    default['python']['virtualenv_location'] = "#{node['python']['prefix_dir']}/bin/virtualenv"
 end
 
